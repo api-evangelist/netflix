@@ -1,0 +1,13 @@
+{
+  "repo": "netflix",
+  "feeds": [
+    {
+      "source": "https://netflixtechblog.com/",
+      "feed_url": "https://netflixtechblog.com/feed",
+      "saved": 10,
+      "title": "Netflix TechBlog - Medium"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:32:38Z"
+}
