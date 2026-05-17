@@ -65,9 +65,9 @@ common:
     url: https://www.netflix.com
   - type: Open Connect
     url: https://openconnect.netflix.com/
-  - type: Tech Blog
+  - type: TechBlog
     url: https://netflixtechblog.com/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/Netflix
   - type: Partner Help Center
     url: https://partnerhelp.netflixstudios.com/
