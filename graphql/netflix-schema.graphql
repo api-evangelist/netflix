@@ -1,0 +1,913 @@
+# Netflix GraphQL Schema
+# Conceptual schema derived from public Netflix engineering documentation,
+# the Netflix Tech Blog, open-source projects (Conductor, Falcor, Zuul),
+# and partner program materials. Not an official Netflix API artifact.
+
+# ─────────────────────────────────────────────
+# Scalars
+# ─────────────────────────────────────────────
+
+scalar DateTime
+scalar Date
+scalar URL
+scalar JSON
+scalar ISO3166Alpha2
+scalar ISO639Alpha2
+scalar DurationMs
+
+# ─────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────
+
+enum TitleType {
+  MOVIE
+  TV_SERIES
+  TV_EPISODE
+  TV_SEASON
+  SHORT
+  SPECIAL
+  STAND_UP
+  DOCUMENTARY
+  MINISERIES
+  ANIME
+  ANIMATION
+  REALITY
+  TALK_SHOW
+  LIVE_EVENT
+  SPORT_EVENT
+}
+
+enum MaturityLevel {
+  ALL
+  KIDS
+  TEENS
+  ADULTS
+}
+
+enum VideoResolution {
+  SD
+  HD
+  FULL_HD
+  UHD_4K
+  HDR
+  DOLBY_VISION
+}
+
+enum AudioFormat {
+  STEREO
+  DOLBY_DIGITAL
+  DOLBY_DIGITAL_PLUS
+  DOLBY_ATMOS
+  DTS
+  DTS_X
+}
+
+enum ProfileType {
+  STANDARD
+  KIDS
+}
+
+enum WatchStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum DownloadStatus {
+  PENDING
+  DOWNLOADING
+  READY
+  EXPIRED
+  FAILED
+}
+
+enum RatingSystem {
+  MPAA
+  TV_PARENTAL_GUIDELINES
+  BBFC
+  FSK
+  PEGI
+  CERO
+  CUSTOM
+}
+
+enum CodecType {
+  H264
+  H265_HEVC
+  AV1
+  VP9
+  MPEG4
+}
+
+enum PersonRoleType {
+  ACTOR
+  DIRECTOR
+  PRODUCER
+  WRITER
+  COMPOSER
+  CINEMATOGRAPHER
+  EDITOR
+  COSTUME_DESIGNER
+  PRODUCTION_DESIGNER
+  VISUAL_EFFECTS
+  VOICE_ACTOR
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+enum AwardStatus {
+  WON
+  NOMINATED
+}
+
+# ─────────────────────────────────────────────
+# Interfaces
+# ─────────────────────────────────────────────
+
+interface Node {
+  id: ID!
+}
+
+interface Title {
+  id: ID!
+  titleId: String!
+  type: TitleType!
+  title: String!
+  synopsis: String
+  shortSynopsis: String
+  genres: [Genre!]!
+  maturity: Maturity!
+  availability: [Availability!]!
+  trailers: [Trailer!]
+  images: [TitleImage!]
+  cast: [Cast!]
+  crew: [CrewMember!]
+  awards: [Award!]
+  productionCompanies: [ProductionCompany!]
+  ratings: [Rating!]
+  languages: [Language!]
+  tags: [String!]
+  year: Int
+  createdAt: DateTime
+  modifiedAt: DateTime
+}
+
+# ─────────────────────────────────────────────
+# Content Catalog Types
+# ─────────────────────────────────────────────
+
+type Movie implements Title & Node {
+  id: ID!
+  titleId: String!
+  type: TitleType!
+  title: String!
+  synopsis: String
+  shortSynopsis: String
+  genres: [Genre!]!
+  maturity: Maturity!
+  availability: [Availability!]!
+  trailers: [Trailer!]
+  images: [TitleImage!]
+  cast: [Cast!]
+  crew: [CrewMember!]
+  awards: [Award!]
+  productionCompanies: [ProductionCompany!]
+  ratings: [Rating!]
+  languages: [Language!]
+  tags: [String!]
+  year: Int
+  createdAt: DateTime
+  modifiedAt: DateTime
+  runtime: DurationMs
+  studio: Studio
+  distributor: Distributor
+  streamInfo: StreamInfo
+  subtitles: [Subtitle!]
+  audioTracks: [AudioTrack!]
+  chapters: [Chapter!]
+  isOriginal: Boolean!
+  isDownloadable: Boolean!
+  streamingRights: [StreamingRights!]
+}
+
+type TVSeries implements Title & Node {
+  id: ID!
+  titleId: String!
+  type: TitleType!
+  title: String!
+  synopsis: String
+  shortSynopsis: String
+  genres: [Genre!]!
+  maturity: Maturity!
+  availability: [Availability!]!
+  trailers: [Trailer!]
+  images: [TitleImage!]
+  cast: [Cast!]
+  crew: [CrewMember!]
+  awards: [Award!]
+  productionCompanies: [ProductionCompany!]
+  ratings: [Rating!]
+  languages: [Language!]
+  tags: [String!]
+  year: Int
+  createdAt: DateTime
+  modifiedAt: DateTime
+  seasons: [TVSeason!]!
+  totalSeasons: Int!
+  totalEpisodes: Int!
+  isOngoing: Boolean!
+  isOriginal: Boolean!
+  studio: Studio
+  distributor: Distributor
+  streamingRights: [StreamingRights!]
+}
+
+type TVSeason implements Node {
+  id: ID!
+  series: TVSeries!
+  seasonNumber: Int!
+  title: String
+  synopsis: String
+  episodes: [TVEpisode!]!
+  totalEpisodes: Int!
+  year: Int
+  images: [TitleImage!]
+  streamingRights: [StreamingRights!]
+}
+
+type TVEpisode implements Node {
+  id: ID!
+  series: TVSeries!
+  season: TVSeason!
+  episodeNumber: Int!
+  title: String!
+  synopsis: String
+  runtime: DurationMs
+  airDate: Date
+  images: [TitleImage!]
+  streamInfo: StreamInfo
+  subtitles: [Subtitle!]
+  audioTracks: [AudioTrack!]
+  chapters: [Chapter!]
+  isDownloadable: Boolean!
+}
+
+type Trailer implements Node {
+  id: ID!
+  title: String!
+  titleRef: String
+  duration: DurationMs
+  streamInfo: StreamInfo
+  language: Language
+  images: [TitleImage!]
+}
+
+type Clip implements Node {
+  id: ID!
+  title: String!
+  titleRef: String
+  duration: DurationMs
+  streamInfo: StreamInfo
+  clipType: String
+}
+
+type Preview implements Node {
+  id: ID!
+  titleRef: String!
+  duration: DurationMs
+  autoPlayEnabled: Boolean
+  streamInfo: StreamInfo
+}
+
+type BehindTheScenes implements Node {
+  id: ID!
+  title: String!
+  titleRef: String
+  duration: DurationMs
+  streamInfo: StreamInfo
+  featureType: String
+}
+
+type LocalOriginals implements Node {
+  id: ID!
+  title: Title!
+  country: Country!
+  language: Language!
+  productionYear: Int
+  isWorldwideRelease: Boolean!
+}
+
+# ─────────────────────────────────────────────
+# People and Credits
+# ─────────────────────────────────────────────
+
+type Person implements Node {
+  id: ID!
+  name: String!
+  bio: String
+  birthDate: Date
+  birthPlace: String
+  nationality: Country
+  images: [PersonImage!]
+  roles: [PersonRole!]!
+  filmography: [Title!]
+}
+
+type PersonRole implements Node {
+  id: ID!
+  person: Person!
+  roleType: PersonRoleType!
+  characterName: String
+  titleRef: String!
+  billingOrder: Int
+}
+
+type Cast implements Node {
+  id: ID!
+  person: Person!
+  characterName: String
+  billingOrder: Int
+  isLead: Boolean!
+}
+
+type CrewMember implements Node {
+  id: ID!
+  person: Person!
+  role: PersonRoleType!
+  department: String
+  billingOrder: Int
+}
+
+type ProductionCompany implements Node {
+  id: ID!
+  name: String!
+  country: Country
+  website: URL
+  logoUrl: URL
+}
+
+type Studio implements Node {
+  id: ID!
+  name: String!
+  country: Country
+  website: URL
+  logoUrl: URL
+  parentCompany: String
+}
+
+type Distributor implements Node {
+  id: ID!
+  name: String!
+  country: Country
+  website: URL
+}
+
+# ─────────────────────────────────────────────
+# Classification and Discovery
+# ─────────────────────────────────────────────
+
+type Genre implements Node {
+  id: ID!
+  name: String!
+  slug: String!
+  subGenres: [SubCategory!]
+  titles: TitleConnection
+}
+
+type Category implements Node {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  subCategories: [SubCategory!]
+  titles: TitleConnection
+  displayOrder: Int
+}
+
+type SubCategory implements Node {
+  id: ID!
+  name: String!
+  slug: String!
+  parent: Category
+  genre: Genre
+  titles: TitleConnection
+}
+
+type TopList implements Node {
+  id: ID!
+  name: String!
+  country: Country
+  titles: [TitleRanking!]!
+  updatedAt: DateTime!
+  listType: String
+}
+
+type TitleRanking {
+  rank: Int!
+  title: Title!
+  weeksOnList: Int
+  change: Int
+}
+
+type Trending implements Node {
+  id: ID!
+  country: Country
+  titles: [TitleRanking!]!
+  updatedAt: DateTime!
+  period: String
+}
+
+type Popular implements Node {
+  id: ID!
+  country: Country
+  genre: Genre
+  titles: [Title!]!
+  updatedAt: DateTime!
+}
+
+type NowPlaying implements Node {
+  id: ID!
+  country: Country
+  titles: [Title!]!
+  updatedAt: DateTime!
+}
+
+type NewRelease implements Node {
+  id: ID!
+  country: Country
+  titles: [Title!]!
+  releaseDate: Date!
+  updatedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Ratings and Maturity
+# ─────────────────────────────────────────────
+
+type Maturity implements Node {
+  id: ID!
+  level: MaturityLevel!
+  minimumAge: Int
+  descriptors: [String!]
+  certificates: [Certificate!]
+}
+
+type Rating implements Node {
+  id: ID!
+  system: RatingSystem!
+  value: String!
+  description: String
+  country: Country
+}
+
+type Certificate implements Node {
+  id: ID!
+  rating: Rating!
+  country: Country!
+  certificateBody: String
+  issuedDate: Date
+}
+
+# ─────────────────────────────────────────────
+# Availability and Rights
+# ─────────────────────────────────────────────
+
+type Availability implements Node {
+  id: ID!
+  country: Country!
+  availableFrom: DateTime
+  availableUntil: DateTime
+  isAvailable: Boolean!
+  streamingRights: StreamingRights
+}
+
+type Country implements Node {
+  id: ID!
+  code: ISO3166Alpha2!
+  name: String!
+  region: String
+  supportedLanguages: [Language!]
+}
+
+type Language implements Node {
+  id: ID!
+  code: ISO639Alpha2!
+  name: String!
+  nativeName: String
+  isRightToLeft: Boolean!
+}
+
+type StreamingRights implements Node {
+  id: ID!
+  country: Country!
+  licenseWindow: LicenseWindow!
+  isExclusive: Boolean!
+  rightType: String
+  licensor: String
+}
+
+type LicenseWindow implements Node {
+  id: ID!
+  startDate: DateTime!
+  endDate: DateTime
+  isRenewable: Boolean!
+  renewalTerms: String
+}
+
+# ─────────────────────────────────────────────
+# Streaming Technical Details
+# ─────────────────────────────────────────────
+
+type StreamInfo implements Node {
+  id: ID!
+  streamUrl: URL
+  videoQualities: [VideoQuality!]!
+  audioQualities: [AudioQuality!]!
+  codecs: [Codec!]
+  isDolbyVision: Boolean!
+  isHDR: Boolean!
+  isAtmos: Boolean!
+  bitrateKbps: Int
+  drmSystem: String
+}
+
+type VideoQuality implements Node {
+  id: ID!
+  resolution: VideoResolution!
+  frameRate: Float
+  bitrateKbps: Int
+  codec: Codec
+}
+
+type AudioQuality implements Node {
+  id: ID!
+  format: AudioFormat!
+  channels: Float
+  bitrateKbps: Int
+  codec: Codec
+}
+
+type Codec implements Node {
+  id: ID!
+  type: CodecType!
+  profile: String
+  level: String
+}
+
+type AudioTrack implements Node {
+  id: ID!
+  language: Language!
+  format: AudioFormat!
+  isOriginalLanguage: Boolean!
+  isDescriptive: Boolean!
+  label: String
+}
+
+type Subtitle implements Node {
+  id: ID!
+  language: Language!
+  isForced: Boolean!
+  isSDH: Boolean!
+  format: String
+  label: String
+}
+
+type Chapter implements Node {
+  id: ID!
+  title: String
+  startTime: DurationMs!
+  endTime: DurationMs!
+  isSkippable: Boolean!
+  chapterType: String
+}
+
+type Timestamp implements Node {
+  id: ID!
+  label: String!
+  time: DurationMs!
+  episodeRef: String
+}
+
+# ─────────────────────────────────────────────
+# User and Profile
+# ─────────────────────────────────────────────
+
+type UserProfile implements Node {
+  id: ID!
+  profileName: String!
+  profileType: ProfileType!
+  language: Language
+  maturityLevel: Maturity
+  avatar: URL
+  watchHistory: WatchHistory
+  queue: [QueueItem!]
+  recommendations: [Recommendation!]
+  ratings: [RatingRecord!]
+  downloads: [DownloadRecord!]
+  earlyAccess: [EarlyAccess!]
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+}
+
+type WatchHistory implements Node {
+  id: ID!
+  profile: UserProfile!
+  entries: [WatchEntry!]!
+  totalTitlesWatched: Int
+  updatedAt: DateTime!
+}
+
+type WatchEntry implements Node {
+  id: ID!
+  title: Title!
+  episode: TVEpisode
+  status: WatchStatus!
+  progressMs: DurationMs
+  lastWatchedAt: DateTime!
+  completedAt: DateTime
+  deviceType: String
+}
+
+type QueueItem implements Node {
+  id: ID!
+  profile: UserProfile!
+  title: Title!
+  addedAt: DateTime!
+  position: Int!
+  notifyOnAvailability: Boolean!
+}
+
+type DownloadRecord implements Node {
+  id: ID!
+  profile: UserProfile!
+  title: Title!
+  episode: TVEpisode
+  status: DownloadStatus!
+  downloadedAt: DateTime
+  expiresAt: DateTime
+  fileSizeBytes: Int
+  videoQuality: VideoQuality
+}
+
+type RatingRecord implements Node {
+  id: ID!
+  profile: UserProfile!
+  title: Title!
+  thumbsUp: Boolean
+  ratedAt: DateTime!
+}
+
+type EarlyAccess implements Node {
+  id: ID!
+  profile: UserProfile!
+  title: Title!
+  accessGrantedAt: DateTime!
+  accessExpiresAt: DateTime
+  accessType: String
+}
+
+# ─────────────────────────────────────────────
+# Recommendations and Search
+# ─────────────────────────────────────────────
+
+type Recommendation implements Node {
+  id: ID!
+  profile: UserProfile!
+  titles: [TitleRecommendation!]!
+  algorithm: String
+  generatedAt: DateTime!
+  context: String
+}
+
+type TitleRecommendation implements Node {
+  id: ID!
+  title: Title!
+  score: Float!
+  reason: String
+  rank: Int
+}
+
+type SimilarTitle implements Node {
+  id: ID!
+  sourceTitle: Title!
+  similarTitle: Title!
+  similarityScore: Float!
+  matchReasons: [String!]
+}
+
+type SearchResult implements Node {
+  id: ID!
+  query: String!
+  titles: [Title!]!
+  people: [Person!]
+  categories: [Category!]
+  totalResults: Int!
+  executedAt: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Awards and Events
+# ─────────────────────────────────────────────
+
+type Award implements Node {
+  id: ID!
+  name: String!
+  organization: String!
+  category: String!
+  year: Int!
+  status: AwardStatus!
+  recipient: String
+  titleRef: String
+}
+
+type Event implements Node {
+  id: ID!
+  name: String!
+  description: String
+  startTime: DateTime!
+  endTime: DateTime
+  country: Country
+  isLive: Boolean!
+  streamInfo: StreamInfo
+}
+
+type LiveEvent implements Node {
+  id: ID!
+  event: Event!
+  streamInfo: StreamInfo!
+  isActive: Boolean!
+  viewerCount: Int
+  chatEnabled: Boolean!
+  startTime: DateTime!
+  endTime: DateTime
+}
+
+type SportEvent implements Node {
+  id: ID!
+  event: Event!
+  sport: String!
+  league: String
+  homeTeam: String
+  awayTeam: String
+  venue: String
+  streamInfo: StreamInfo!
+  isLive: Boolean!
+  startTime: DateTime!
+}
+
+# ─────────────────────────────────────────────
+# Images
+# ─────────────────────────────────────────────
+
+type TitleImage implements Node {
+  id: ID!
+  url: URL!
+  imageType: String!
+  width: Int
+  height: Int
+  language: Language
+}
+
+type PersonImage implements Node {
+  id: ID!
+  url: URL!
+  imageType: String!
+  width: Int
+  height: Int
+}
+
+# ─────────────────────────────────────────────
+# Connections and Pagination
+# ─────────────────────────────────────────────
+
+type TitleConnection {
+  edges: [TitleEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type TitleEdge {
+  node: Title!
+  cursor: String!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ─────────────────────────────────────────────
+# Inputs
+# ─────────────────────────────────────────────
+
+input TitleFilterInput {
+  types: [TitleType!]
+  genreIds: [ID!]
+  countryCode: ISO3166Alpha2
+  languageCode: ISO639Alpha2
+  maturityLevel: MaturityLevel
+  yearFrom: Int
+  yearTo: Int
+  isOriginal: Boolean
+  isDownloadable: Boolean
+  searchQuery: String
+}
+
+input PaginationInput {
+  first: Int
+  after: String
+  last: Int
+  before: String
+}
+
+input SortInput {
+  field: String!
+  order: SortOrder!
+}
+
+# ─────────────────────────────────────────────
+# Root Types
+# ─────────────────────────────────────────────
+
+type Query {
+  # Content retrieval
+  title(id: ID!): Title
+  movie(id: ID!): Movie
+  tvSeries(id: ID!): TVSeries
+  tvSeason(id: ID!): TVSeason
+  tvEpisode(id: ID!): TVEpisode
+  titles(filter: TitleFilterInput, pagination: PaginationInput, sort: SortInput): TitleConnection!
+
+  # Discovery
+  trending(countryCode: ISO3166Alpha2): Trending
+  popular(countryCode: ISO3166Alpha2, genreId: ID): Popular
+  newReleases(countryCode: ISO3166Alpha2): NewRelease
+  topList(countryCode: ISO3166Alpha2): TopList
+  nowPlaying(countryCode: ISO3166Alpha2): NowPlaying
+
+  # Genres and categories
+  genres: [Genre!]!
+  genre(id: ID!): Genre
+  categories: [Category!]!
+  category(id: ID!): Category
+
+  # People
+  person(id: ID!): Person
+  searchPeople(query: String!, pagination: PaginationInput): [Person!]!
+
+  # Countries and languages
+  countries: [Country!]!
+  country(code: ISO3166Alpha2!): Country
+  languages: [Language!]!
+
+  # User profile (authenticated)
+  profile(id: ID!): UserProfile
+  watchHistory(profileId: ID!): WatchHistory
+  recommendations(profileId: ID!, limit: Int): [Recommendation!]!
+  queue(profileId: ID!): [QueueItem!]!
+  downloads(profileId: ID!): [DownloadRecord!]!
+
+  # Search
+  search(query: String!, countryCode: ISO3166Alpha2, pagination: PaginationInput): SearchResult
+
+  # Similar titles
+  similarTitles(titleId: ID!, limit: Int): [SimilarTitle!]!
+
+  # Events
+  liveEvents(countryCode: ISO3166Alpha2): [LiveEvent!]!
+  sportEvents(countryCode: ISO3166Alpha2): [SportEvent!]!
+}
+
+type Mutation {
+  # Queue management
+  addToQueue(profileId: ID!, titleId: ID!): QueueItem
+  removeFromQueue(profileId: ID!, queueItemId: ID!): Boolean
+  reorderQueue(profileId: ID!, queueItemId: ID!, newPosition: Int!): QueueItem
+
+  # Rating
+  rateTitle(profileId: ID!, titleId: ID!, thumbsUp: Boolean!): RatingRecord
+  removeRating(profileId: ID!, titleId: ID!): Boolean
+
+  # Watch history
+  updateWatchProgress(profileId: ID!, titleId: ID!, episodeId: ID, progressMs: DurationMs!): WatchEntry
+  markWatched(profileId: ID!, titleId: ID!, episodeId: ID): WatchEntry
+  removeFromHistory(profileId: ID!, watchEntryId: ID!): Boolean
+
+  # Downloads
+  initiateDownload(profileId: ID!, titleId: ID!, episodeId: ID, videoQualityId: ID): DownloadRecord
+  deleteDownload(profileId: ID!, downloadRecordId: ID!): Boolean
+}
+
+type Subscription {
+  # Live streaming events
+  liveEventUpdated(eventId: ID!): LiveEvent
+  sportEventUpdated(eventId: ID!): SportEvent
+
+  # Download progress
+  downloadProgress(profileId: ID!, downloadRecordId: ID!): DownloadRecord
+}
