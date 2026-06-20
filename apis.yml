@@ -5,7 +5,7 @@ description: Netflix is a streaming entertainment service operating one of the w
   consumer API, it operates partner programs including Open Connect for ISP CDN integration
   and device certification programs for manufacturers embedding the Netflix application.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - CDN
 - Content Delivery
