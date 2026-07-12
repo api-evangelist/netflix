@@ -60,6 +60,10 @@ apis:
   - type: Documentation
     url: https://partnerhelp.netflixstudios.com/
 common:
+- type: VulnerabilityDisclosure
+  url: security/netflix-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/netflix-domain-security.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/netflix
 - type: Website

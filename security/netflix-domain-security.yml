@@ -1,0 +1,40 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.netflix.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb 18 21:41:48 2027 GMT
+  hsts: null
+- host: openconnect.netflix.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  7 12:01:56 2026 GMT
+  hsts: false
+- host: partnerhelp.netflixstudios.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 27 23:40:36 2026 GMT
+  hsts: true
+  hsts_max_age: 259200
+domains:
+- domain: netflix.com
+  dnssec: false
+  caa:
+  - 0 issue "digicert.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: netflixstudios.com
+  dnssec: false
+  caa:
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog"
+  - 0 issue "digicert.com"
+  - 0 issue "entrust.net"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
