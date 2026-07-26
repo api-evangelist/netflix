@@ -37,10 +37,6 @@ Netflix Open Connect is the purpose-built content delivery network that delivers
 - [Peering](https://openconnect.netflix.com/en/peering/)
 - [Contact](https://openconnect.netflix.com/en/contact-us/)
 
-### Netflix Partner Help Center
-The Netflix Partner Help Center provides resources for device manufacturers, integrators, and content partners. It documents device certification requirements, integration specifications, and support processes for partners building Netflix-enabled products.
-
-**Human URL:** [https://partnerhelp.netflixstudios.com/](https://partnerhelp.netflixstudios.com/)
 
 #### Tags:
 
