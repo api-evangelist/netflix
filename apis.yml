@@ -28,7 +28,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/netflix/refs/heads/main/apis.yml
 created: '2026-03-21'
 modified: '2026-07-25'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
   - aid: netflix:netflix-open-connect
     name: Netflix Open Connect
