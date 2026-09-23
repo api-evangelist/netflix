@@ -1,7 +1,9 @@
 ---
 title: Netflix 'all in' on leveraging AI in its streaming platform
 url: https://www.cnbc.com/2025/10/22/netflix-all-in-on-leveraging-ai-in-its-streaming-platform.html
-date: '2026-05-25'
+published: '2025-10-22'
+date_basis: url-derived
+harvested: '2026-05-25'
 query: '"Netflix" press release artificial intelligence'
 position: 4
 source: serpapi-google

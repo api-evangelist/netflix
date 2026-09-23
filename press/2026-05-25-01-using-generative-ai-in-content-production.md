@@ -1,7 +1,9 @@
 ---
 title: Using Generative AI in Content Production
 url: https://partnerhelp.netflixstudios.com/hc/en-us/articles/43393929218323-Using-Generative-AI-in-Content-Production
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Netflix" press release artificial intelligence'
 position: 1
 source: serpapi-google
