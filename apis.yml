@@ -60,8 +60,6 @@ apis:
         url: https://openconnect.netflix.com/en/peering/
       - type: Contact
         url: https://openconnect.netflix.com/en/contact-us/
-      - url: graphql/netflix-graphql.md
-        type: GraphQL
 common:
   - type: VulnerabilityDisclosure
     url: security/netflix-vulnerability-disclosure.yml
