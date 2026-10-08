@@ -61,6 +61,12 @@ apis:
       - type: Contact
         url: https://openconnect.netflix.com/en/contact-us/
 common:
+  - type: Plans
+    url: plans/netflix-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/netflix-rate-limits.yml
+  - type: FinOps
+    url: finops/netflix-finops.yml
   - type: VulnerabilityDisclosure
     url: security/netflix-vulnerability-disclosure.yml
   - type: DomainSecurity
