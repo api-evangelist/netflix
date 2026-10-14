@@ -5,6 +5,23 @@ checked:
 - https://storage.googleapis.com/tcfac/additional-consent-providers.csv
 marketplace_apps: []
 edges:
+- partner_name: JetBrains Marketplace
+  partner: jetbrains
+  partner_match: aggregator
+  type: marketplace
+  marketplace: jetbrains
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://plugins.jetbrains.com/vendor/netflix
+  listing_count: 1
+  apps:
+  - DGS
+  publisher_name: Netflix
+  badges:
+  - Verified vendor
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 - partner_name: Google Ad Tech Providers
   partner: null
   partner_match: domain
@@ -27,23 +44,6 @@ edges:
     detected_by: sweep-adtech.py
     detected: '2026-10-14'
   detected_by: sweep-adtech.py
-  detected: '2026-10-14'
-- partner_name: JetBrains Marketplace
-  partner: jetbrains
-  partner_match: aggregator
-  type: marketplace
-  marketplace: jetbrains
-  channel: partner-built
-  relationship: platform-app
-  direction: third-party
-  evidence: https://plugins.jetbrains.com/vendor/netflix
-  listing_count: 1
-  apps:
-  - DGS
-  publisher_name: Netflix
-  badges:
-  - Verified vendor
-  detected_by: sweep-devtools.py
   detected: '2026-10-14'
 source:
 - https://plugins.jetbrains.com/
