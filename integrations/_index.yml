@@ -38,3 +38,54 @@
     detected: '2026-10-14'
   status: not-a-workflow
   arazzo: null
+- slug: netflix-dash-industry-forum
+  label: DASH Industry Forum
+  partner_name: DASH Industry Forum
+  category: adaptive streaming standard (MPEG-DASH)
+  type: register
+  channel: standard-directory
+  evidence: https://dashif.org/members/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: DASH Industry Forum members (dashif.org/members)
+    standard: MPEG-DASH (DASH-IF IOP)
+    spec_file: null
+    role: dashif-contributor-member
+    registered_name: netflox
+    register_id: https://signup.netflix.com/
+    name_source: logo file name (the page prints no name)
+    member_tier: contributor
+    matched_domain: netflix.com
+    matched_by: domain+verified
+    signal_note: 'participation only: DASH-IF publishes no certified-products list (conformance.dashif.org is a
+      validator tool); member_tier is a per-edge signal, never counted'
+    detected_by: sweep-streaming-video.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: netflix-streaming-video-technology-alliance
+  label: Streaming Video Technology Alliance
+  partner_name: Streaming Video Technology Alliance
+  category: streaming video technology alliance
+  type: register
+  channel: standard-directory
+  evidence: https://www.svta.org/svta-member-companies-list/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Streaming Video Technology Alliance member companies (svta.org, wp-json pages API)
+    standard: SVTA specifications (CDN interop, Open Caching, measurement)
+    spec_file: null
+    role: svta-member
+    registered_name: Netflix
+    register_id: Netflix
+    matched_domain: netflix.com
+    matched_by: domain
+    identity: wikidata Q907311 'Netflix' P856 https://www.netflix.com/
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    signal_note: participation only; the list prints no tier
+    detected_by: sweep-streaming-video.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null

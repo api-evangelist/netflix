@@ -1,8 +1,10 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- https://dashif.org/members/
 - https://plugins.jetbrains.com/
 - https://storage.googleapis.com/tcfac/additional-consent-providers.csv
+- https://www.svta.org/svta-member-companies-list/
 marketplace_apps: []
 edges:
 - partner_name: JetBrains Marketplace
@@ -45,5 +47,56 @@ edges:
     detected: '2026-10-14'
   detected_by: sweep-adtech.py
   detected: '2026-10-14'
+- partner_name: DASH Industry Forum
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  channel: standard-directory
+  relationship: standard-participant
+  evidence: https://dashif.org/members/
+  category: adaptive streaming standard (MPEG-DASH)
+  contract_reference:
+    register: DASH Industry Forum members (dashif.org/members)
+    standard: MPEG-DASH (DASH-IF IOP)
+    spec_file: null
+    role: dashif-contributor-member
+    registered_name: netflox
+    register_id: https://signup.netflix.com/
+    name_source: logo file name (the page prints no name)
+    member_tier: contributor
+    matched_domain: netflix.com
+    matched_by: domain+verified
+    signal_note: 'participation only: DASH-IF publishes no certified-products list (conformance.dashif.org is a
+      validator tool); member_tier is a per-edge signal, never counted'
+    detected_by: sweep-streaming-video.py
+    detected: '2026-10-18'
+  detected_by: sweep-streaming-video.py
+  first_seen: '2026-10-18'
+- partner_name: Streaming Video Technology Alliance
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  channel: standard-directory
+  relationship: standard-participant
+  evidence: https://www.svta.org/svta-member-companies-list/
+  category: streaming video technology alliance
+  contract_reference:
+    register: Streaming Video Technology Alliance member companies (svta.org, wp-json pages API)
+    standard: SVTA specifications (CDN interop, Open Caching, measurement)
+    spec_file: null
+    role: svta-member
+    registered_name: Netflix
+    register_id: Netflix
+    matched_domain: netflix.com
+    matched_by: domain
+    identity: wikidata Q907311 'Netflix' P856 https://www.netflix.com/
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    signal_note: participation only; the list prints no tier
+    detected_by: sweep-streaming-video.py
+    detected: '2026-10-18'
+  detected_by: sweep-streaming-video.py
+  first_seen: '2026-10-18'
 source:
 - https://plugins.jetbrains.com/
