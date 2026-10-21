@@ -5,6 +5,17 @@ checked:
 - https://plugins.jetbrains.com/
 - https://storage.googleapis.com/tcfac/additional-consent-providers.csv
 - https://www.svta.org/svta-member-companies-list/
+- https://members.eidr.org/
+- https://movielabs.com/2030showcase/
+- https://movielabs.com/about-industry-forum/
+- https://movielabs.com/about/
+- https://plus.ttpn.org/
+- https://web.isan.org/public/en/sign-up
+- https://www.eidr.org/eidr-participants
+- https://www.eidr.org/members/
+- https://www.thedpp.com/members-directory
+- https://www.thedpp.com/security
+- https://www.ttpn.org/
 marketplace_apps: []
 edges:
 - partner_name: JetBrains Marketplace
@@ -98,5 +109,31 @@ edges:
     detected: '2026-10-18'
   detected_by: sweep-streaming-video.py
   first_seen: '2026-10-18'
+- partner_name: EIDR (Entertainment ID Registry)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.eidr.org/eidr-participants
+  category: film / TV content identifier registry
+  contract_reference:
+    register: EIDR contributors and participants (eidr.org/eidr-participants)
+    standard: EIDR
+    spec_file: null
+    role: eidr-participant
+    registered_name: Netflix
+    register_id: https://www.eidr.org/eidr-participants
+    matched_domain: netflix.com
+    matched_by: domain
+    signal_note: 'participation only: a listing on the register, never counted'
+    detected_by: sweep-film-media-identifiers-eidr.py
+    detected: '2026-10-21'
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+    identity: wikidata Q907311 'Netflix' P856 https://www.netflix.com/
+    logo_alt: Netflix (200x90)
+  detected_by: sweep-film-media-identifiers-eidr.py
+  first_seen: '2026-10-21'
 source:
 - https://plugins.jetbrains.com/
