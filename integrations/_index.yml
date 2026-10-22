@@ -115,3 +115,72 @@
     logo_alt: Netflix (200x90)
   status: not-a-workflow
   arazzo: null
+- slug: netflix-cve-program-cve-numbering-authorities
+  label: CVE Program (CVE Numbering Authorities)
+  partner_name: CVE Program (CVE Numbering Authorities)
+  category: Vulnerability disclosure (CVE Numbering Authority)
+  type: register
+  channel: standard-directory
+  evidence: https://www.cve.org/PartnerInformation/ListofPartners/partner/netflix
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: CVE Program CNA list (github.com/CVEProject/cve-website CNAsList.json @ 239d3d9b68e0)
+    standard: CVE Program CNA Operational Rules (CVE Numbering Authority)
+    spec_file: null
+    role: cve-numbering-authority
+    registered_name: Netflix, Inc.
+    matched_domain: netflix.com
+    matched_by: domain
+    cna_id: CNA-2017-0016
+    cna_short_name: netflix
+    cna_types:
+    - Vendor
+    - Open Source
+    cna_roles:
+    - CNA
+    scope: Current versions of Netflix Mobile Streaming Application for iOS, Android, and Windows Mobile, plus all
+      Netflix Open Source projects hosted on <a href='https://github.com/Netflix/' target='_blank'>https://github.com/Netflix/</a>
+      and <a href='https://github.com/spinnaker/' target='_blank'>https://github.com/spinnaker/</a>.
+    top_level_root: MITRE Corporation
+    root: n/a
+    security_advisories:
+    - https://github.com/Netflix/security-bulletins
+    disclosure_policy:
+    - https://help.netflix.com/en/node/6657
+    country: USA
+    signal_note: listing as a CVE Numbering Authority = participation (a public commitment to assign CVE IDs and
+      publish advisories for its scope); never a count of CVEs
+    detected_by: sweep-vulnerability-disclosure-cna.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
+- slug: netflix-first-forum-of-incident-response-and-security-teams
+  label: FIRST (Forum of Incident Response and Security Teams)
+  partner_name: FIRST (Forum of Incident Response and Security Teams)
+  category: Incident response / PSIRT (FIRST member team)
+  type: register
+  channel: standard-directory
+  evidence: https://www.first.org/members/teams/netflix_sirt
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: FIRST member teams (api.first.org/data/v1/teams, public JSON API)
+    standard: FIRST (Forum of Incident Response and Security Teams) membership
+    spec_file: null
+    role: first-member-team
+    registered_name: Netflix, Los Gatos CA
+    matched_domain: netflix.com
+    matched_by: domain
+    teams:
+    - id: netflix_sirt
+      team: Netflix SIRT
+      team_type: PSIRT, CSIRT
+      member_since: June 20, 2018
+      country: US
+    signal_note: FIRST full membership of an incident-response / product-security team = participation; team_type
+      names CSIRT / PSIRT / SOC; never a count
+    detected_by: sweep-vulnerability-disclosure-cna.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
